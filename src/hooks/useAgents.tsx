@@ -140,9 +140,6 @@ const fetchAgents = async ({
       )
     )) as string[];
 
-    
-
-
     const tokens: TokenIdInfo[] = tokenIds.map((tokenId, index) => ({
       tokenId: tokenId as string,
       firstSync: firstSyncs[index],
@@ -154,7 +151,7 @@ const fetchAgents = async ({
 
     return {
       supply,
-      tokens
+      tokens,
     };
   } catch (err) {
     console.log("Error", err);
