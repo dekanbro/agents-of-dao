@@ -220,7 +220,7 @@ export const AgentDetail = () => {
           {/* hats */}
           {isHatsLoading && <div>loading...</div>}
           {hats && hats.map((hat, i) => (
-            <ParMd key={i}>🎩 {hat.details.data.name}</ParMd>
+            <ParMd key={i}>🎩 {hat.details?.data?.name}</ParMd>
           ))}
           </LinkGroup>
           <Label>Links:</Label>
