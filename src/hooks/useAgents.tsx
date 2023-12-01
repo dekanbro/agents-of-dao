@@ -21,7 +21,6 @@ export type TokenIdInfo = {
   tbaBalance: string;
 };
 
-
 const fetchAgents = async ({
   chainId,
   ownerAddress,
