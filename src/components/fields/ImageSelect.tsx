@@ -13,7 +13,7 @@ const GridContainer = styled.div`
   margin-bottom: 1rem;
 `;
 
-const GridItem = styled.div<{ isselected: boolean }>`
+const GridItem = styled.div<{ isselected: number | undefined }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +49,7 @@ export const ImageSelect = (props: Buildable<object>) => {
           return (
             <GridItem
               key={i + 1}
-              isselected={selectedImage === src}
+              isselected={(selectedImage === src) ? 1 : 0}
               onClick={() => handleImageClick(src)}
             >
               <img src={src} alt={`profile ${i + 1}`} width="60" height="60" />

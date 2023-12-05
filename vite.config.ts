@@ -5,6 +5,8 @@ import { viteSingleFile } from "vite-plugin-singlefile"
 export default ({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd()));
 
+  console.log("process.env", process.env);
+
   return defineConfig({
     plugins: [react(), viteSingleFile()],
     define: {

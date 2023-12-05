@@ -3,17 +3,6 @@ run-name: ${{ github.actor }} is deploying to out Web3 🚀
 on:
   push:
     branches: main
-env:
-  VITE_RIVET_KEY: ${{ secrets.VITE_RIVET_KEY }}
-  VITE_WALLET_CONNECT_ID: ${{ secrets.VITE_WALLET_CONNECT_ID }}
-  VITE_GRAPH_API_KEY_MAINNET: ${{ secrets.VITE_GRAPH_API_KEY_MAINNET }}
-  VITE_GOERLI_RPC: ${{ secrets.VITE_GOERLI_RPC }}
-  VITE_OPTIMISM_RPC: ${{ secrets.VITE_OPTIMISM_RPC }}
-  NX_RIVET_KEY: ${{ secrets.VITE_RIVET_KEY }}
-  NX_WALLET_CONNECT_ID: ${{ secrets.VITE_WALLET_CONNECT_ID }}
-  NX_GRAPH_API_KEY_MAINNET: ${{ secrets.VITE_GRAPH_API_KEY_MAINNET }}
-  NX_GOERLI_RPC: ${{ secrets.VITE_GOERLI_RPC }}
-  NX_OPTIMISM_RPC: ${{ secrets.VITE_OPTIMISM_RPC }}
 jobs:
   Deploy-To-Web3-Storage:
     runs-on: ubuntu-latest
@@ -34,10 +23,18 @@ jobs:
           node-version: 18.12.1
           cache: 'npm'
       - run: rm -rf node_modules && yarn install --frozen-lockfile
+      - name: Create env file
+        run: |
+          touch .env
+          echo VITE_RIVET_KEY=${{ secrets.VITE_RIVET_KEY }}  >> .env
+          echo VITE_WALLET_CONNECT_ID=${{ secrets.VITE_WALLET_CONNECT_ID }}  >> .env
+          echo VITE_GRAPH_API_KEY_MAINNET=${{ secrets.VITE_GRAPH_API_KEY_MAINNET }}  >> .env
+          echo VITE_GOERLI_RPC=${{ secrets.VITE_GOERLI_RPC }}  >> .env
+          echo VITE_OPTIMISM_RPC=${{ secrets.VITE_OPTIMISM_RPC }}  >> .env
       - run: yarn build
       - name: List files in the repository
         run: |
-          ls -l ${{ github.workspace }}
+          ls ${{ github.workspace }}
       - uses: web3-storage/add-to-web3@v2
         id: web3
         with:
